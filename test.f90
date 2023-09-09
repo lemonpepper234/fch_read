@@ -705,6 +705,8 @@ real(kind = r8), dimension(:,:), allocatable :: y_array
 real(kind = r8), dimension(:,:), allocatable :: z_array 
 real(kind = r8), dimension(:,:), allocatable :: rho
 
+integer :: molecule_index
+
 type(molecule) :: mol
 
 character(len = 80) :: filename, outputfile, positionfile
@@ -737,6 +739,7 @@ allocate (rho(resolution, resolution))
 
 call span_xy(xmin, xmax, ymin, ymax, resolution, x_array, y_array)
 
+!-------------todo: build a module to generate a plane or 3d grid
 z_array = 0.0_r8
 
 
@@ -745,9 +748,10 @@ call read_basis_func(iounit, mol, x0, y0, z0)
 call read_molecular_orbit(iounit, mol)
 close(iounit)
 
-rho = mol%den_a(x_array, y_array, z_array, 2) + mol%den_b(x_array, y_array, z_array, 2)
+!-------------todo: build a module to calculate the density for all kind of shell (R U NO RO)
 
-
+rho = mol%den_a(x_array, y_array, z_array, molecule_index) + &
+      mol%den_b(x_array, y_array, z_array, molecule_index)
 
 open(unit=iounit, file=outputfile, status='new', action='write')
 write(iounit, written_format) ((rho(iter, jter), jter = 1, resolution),iter = 1, resolution)
@@ -756,7 +760,7 @@ close(iounit)
 
 
 
-
+!----------debug code
 !write(*,'(30ES15.7)') mol%basis(:)%value(0.0_r8, 0.0_r8, 0.0_r8)
 !write(*,'(30ES15.7)') mol%amo_coeff(2, :)
 !write(*,'(30ES15.7)') mol%amo_coeff(2, :) * mol%basis(:)%value(0.0_r8,0.0_r8,0.0_r8)
