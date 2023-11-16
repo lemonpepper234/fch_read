@@ -79,7 +79,6 @@ module advanced_fun
                                 xyz_set(point_iter, 2), xyz_set(point_iter, 3), &
                                 num_molecule) * &
                                 r_array(r_iter)**2 * sin(xyz_set(point_iter, 4)) * &
-                                (rmax / resolution_r) * &
                                 ( pi / resolution_theta) * &
                                 (2.0_r8 * pi / resolution_phi)
 

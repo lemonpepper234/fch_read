@@ -111,7 +111,7 @@ integration = sphere_integrate(rmax, &
             resolution_r, resolution_theta, resolution_phi, &
             mol, molecule_index, fun_ptr)
 
-open(unit=iounit, file="sphere_integrationg.txt", status='new', action='write')
+open(unit=iounit, file="sphere_integrating.txt", status='new', action='write')
 write(iounit, '(1ES17.7E3)') (integration(iter), iter = 1, resolution_r)
 close(iounit)
 
