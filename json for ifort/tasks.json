@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "includePath",
+            "type": "promptString",
+            "description": "Please provide the INCLUDE path for .mod files:"
+        }
+    ],
+    "tasks": [
+        {
+            "label": "Compile using ifort",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/C",
+                "setvars.bat &&",
+                "ifort",
+                "-openmp",
+                "-I${fileDirname}",
+                "-O3",
+                "/debug",
+                "${fileDirname}\\*.f90",
+                "-o",
+                "${workspaceFolder}\\${fileBasenameNoExtension}.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+    { // 可以通过ctrl+shift+P, Tasks:Run Task 调用任务
+    "label": "build",
+    "type": "shell",
+    "command": "gfortran",
+    "args": [
+    "-g",
+    "${workspaceFolder}\\*.f90",
+    "-o",
+    "${workspaceFolder}\\${fileBasenameNoExtension}.exe"
+    ],
+    "problemMatcher": [],
+    "group": {
+    "kind": "build",
+    "isDefault": false
+    }
+    },
+    {
+    "label": "clean",
+    "type": "shell",
+    "command": "rm -f *.o hello_fort",
+    "problemMatcher": []
+    },
+    {
+        "label": "make build",
+        "type": "shell",
+        "command": "mingw32-make",
+        "problemMatcher": [],
+        "group": {
+        "kind": "build",
+        "isDefault": true // 可以用ctrl+shift+B快捷调用默认的构建任务
+        }
+        }
+    ]
+    }
